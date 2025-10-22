@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: 论坛系统
+  output:
+    ansi:
+      enabled: always # 配置输出效果
+
+server:
+  port: 27070 # 自定义服务器端口
+
+logging:
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss
+  level:
+    root: info
+    com.honortech.forum_system: debug
+  file:
+    path: E:/forum_system/log_dir

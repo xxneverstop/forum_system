@@ -27,7 +27,15 @@
         <url/>
     </scm>
     <properties>
+        <!-- JAVA 版本 -->
         <java.version>17</java.version>
+        <!-- 编译环境JDK版本 -->
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <!-- 运⾏环境JVM版本 -->
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <!-- 构建项⽬指定编码集 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     </properties>
     <dependencies>
         <dependency>
@@ -81,5 +89,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>
