@@ -8,6 +8,7 @@ class ForumSystemApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println("test code: Spring Boot, forum system");
     }
 
 }
