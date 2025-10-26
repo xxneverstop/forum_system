@@ -5,8 +5,22 @@ spring:
     ansi:
       enabled: always # 配置输出效果
 
+  datasource:
+    url: jdbc:mysql://localhost:3306/forum_db?useSSL=false&serverTimezone=UTC
+    username: root
+    password: Xrw2001724..
+    driver-class-name: com.mysql.cj.jdbc.Driver # 数据库连接驱动
+
+    # 👇 明确指定 Druid
+    type: com.alibaba.druid.pool.DruidDataSource
+
 server:
   port: 27070 # 自定义服务器端口
+
+# 配置mybatis到哪里去找你的 Mapper XML 文件（SQL 映射文件）
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml # classpath表示路径是从编译后的类路径（target/classes）下查找
+                                              # **/*.xml 通配符，表示可以递归查找任意层级的 .xml 文件
 
 logging:
   pattern:
