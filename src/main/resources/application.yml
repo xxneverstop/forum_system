@@ -30,3 +30,17 @@ logging:
     com.honortech.forum_system: debug
   file:
     path: E:/forum_system/log_dir
+
+
+springdoc:
+  api-docs:
+    enabled: true           # 是否启用 API 文档（生产环境可关闭）
+    path: /v3/api-docs      # 文档访问路径，可自定义
+  swagger-ui:
+    enabled: true           # 是否启用 Swagger UI
+    path: /swagger-ui.html  # Swagger UI 访问路径
+    display-request-duration: true  # 显示请求耗时
+    tags-sorter: alpha      # 标签按字母排序
+    operations-sorter: alpha # 接口按字母排序
+  packages-to-scan: com.honortech.forum_system.controller  # 指定扫描的 controller 包
+

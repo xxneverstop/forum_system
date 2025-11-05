@@ -44,6 +44,7 @@
         <!-- mybatis-generator-->
         <mybatis-generator-plugin.version>1.4.2</mybatis-generator-plugin.version>
 
+        <springdoc.version>2.8.3</springdoc.version>
 
     </properties>
     <dependencies>
@@ -89,6 +90,17 @@
             <version>${druid-starter.version}</version>
         </dependency>
 
+        <!-- ✅ Spring Boot 3.5.6 兼容的 Springdoc 依赖 -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.version}</version> <!-- 或最新版 -->
+        </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
 
     </dependencies>
 

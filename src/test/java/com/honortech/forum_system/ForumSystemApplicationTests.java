@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.UUID;
 
 @SpringBootTest
 class ForumSystemApplicationTests {
@@ -43,4 +44,10 @@ class ForumSystemApplicationTests {
         System.out.println("test code: Spring Boot, forum system");
     }
 
+
+    @Test
+    void testUUID() {
+        String uuid = UUID.randomUUID().toString();
+        System.out.println(uuid);
+    }
 }

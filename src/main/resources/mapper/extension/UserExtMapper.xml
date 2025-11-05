@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.honortech.forum_system.dao.UserMapper">
+    <!--
+     1. 注意namespace表⽰命名空间，要与 UserMapper.xml中的namespace相同
+     2. 统⼀⽤com.honortech.forum_system.dao.UserMapper, 也就是UserMapper的完全限定名(包
+    名+类名)
+     3. 不同的映射⽂件指定了相同的namespace后，定义的所有⽤id或name标识的结果集映射都可以
+    在不同的⽂件中共享
+
+     4. 这样就可以自己编写一些扩展方法了
+    -->
+    <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_user
+        WHERE deleteState = 0
+        AND username = #{username,jdbcType=VARCHAR}
+
+    </select>
+
+</mapper>
