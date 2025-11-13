@@ -4,6 +4,9 @@ spring:
   output:
     ansi:
       enabled: always # 配置输出效果
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: NON_NULL
 
   datasource:
     url: jdbc:mysql://localhost:3306/forum_db?useSSL=false&serverTimezone=UTC
@@ -44,3 +47,8 @@ springdoc:
     operations-sorter: alpha # 接口按字母排序
   packages-to-scan: com.honortech.forum_system.controller  # 指定扫描的 controller 包
 
+honortech:
+  login:
+    url: sign-in.html
+  index:                    # 首页配置节点
+    board_num: 9            # 首页板块个数

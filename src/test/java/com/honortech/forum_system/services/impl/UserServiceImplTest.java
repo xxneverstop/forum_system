@@ -7,12 +7,15 @@ import com.honortech.forum_system.utils.UUIDUtil;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 class UserServiceImplTest {
     @Resource
     private IUserService userService;
 
+    @Transactional
+    // 加上 @Transactional
     @Test
     void createNormalUser() {
         User user =  new User();
@@ -26,5 +29,30 @@ class UserServiceImplTest {
 
         userService.createNormalUser(user);
         System.out.println(user);
+    }
+
+    @Test
+    void selectByUsername() {
+        User user = userService.selectByUsername("testUser1");
+        System.out.println(user);
+    }
+
+    @Test
+    void login() {
+        User user = userService.login("testUser1", "111111");
+        System.out.println(user);
+    }
+
+    @Test
+    void selectById() {
+        User user = userService.selectById(4L);
+        System.out.println(user);
+    }
+
+    @Test
+    @Transactional
+    void addOneArticleCountById() {
+        userService.addOneArticleCountById(1L);
+        System.out.println("update success");
     }
 }

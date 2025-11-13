@@ -13,8 +13,13 @@ public enum ResultCode {
     FAILED_LOGIN                (1103, "login failure"),
     FAILED_USER_BANNED          (1104, "user banned"),
     FAILED_TWO_PWD_NOT_SAME     (1105, "password not match"),
+
+    // 关于板块的错误码
+    FAILED_BOARD_ARTICLE_COUNT  (1201, "add board article count failure"),
+
     ERROR_SERVICES              (2000, "sever error"),
     ERROR_IS_NULL               (2001, "null error");
+
 
 
 

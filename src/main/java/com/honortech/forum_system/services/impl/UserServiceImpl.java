@@ -6,6 +6,7 @@ import com.honortech.forum_system.dao.UserMapper;
 import com.honortech.forum_system.exception.ApplicationException;
 import com.honortech.forum_system.model.User;
 import com.honortech.forum_system.services.IUserService;
+import com.honortech.forum_system.utils.MD5Util;
 import com.honortech.forum_system.utils.StringUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -58,5 +59,72 @@ public class UserServiceImpl implements IUserService {
         }
 
         log.info("Successfully created new user, username = " + user.getUsername());
+    }
+
+    @Override
+    public User selectByUsername(String username) {
+        if(username == null || StringUtil.isEmpty(username)) {
+            log.warn(ResultCode.FAILED_PARAMS_VALIDATE.toString());
+            throw new ApplicationException(AppResult.fail(ResultCode.FAILED_PARAMS_VALIDATE));
+        }
+        return userMapper.selectByUsername(username);
+    }
+
+    @Override
+    public User login(String username, String password) {
+        if(username == null || StringUtil.isEmpty(username) || StringUtil.isEmpty(password)) {
+            log.warn(ResultCode.FAILED_LOGIN.toString());
+            throw new ApplicationException(AppResult.fail(ResultCode.FAILED_LOGIN));
+        }
+
+        User user = userMapper.selectByUsername(username);
+        if(user == null) {
+            log.warn(ResultCode.FAILED_LOGIN.toString());
+            throw new ApplicationException(AppResult.fail(ResultCode.FAILED_LOGIN));
+        }
+
+        String encryptPassword = MD5Util.md5(password,  user.getSalt());
+        if(!user.getPassword().equals(encryptPassword)) {
+            log.warn(ResultCode.FAILED_LOGIN.toString());
+            throw new ApplicationException(AppResult.fail(ResultCode.FAILED_LOGIN));
+        }
+
+        log.info("Successfully login username = " + user.getUsername());
+
+        return user;
+    }
+
+    @Override
+    public User selectById(Long id) {
+        if(id == null) {
+            log.warn(ResultCode.FAILED_PARAMS_VALIDATE.toString());
+            throw new ApplicationException(AppResult.fail(ResultCode.FAILED_PARAMS_VALIDATE));
+        }
+        return userMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void addOneArticleCountById(Long id) {
+        if (id == null ||  id <= 0) {
+            log.warn(ResultCode.FAILED_BOARD_ARTICLE_COUNT.toString());
+            throw new ApplicationException(AppResult.fail((ResultCode.FAILED_BOARD_ARTICLE_COUNT)));
+        }
+
+        User user = userMapper.selectByPrimaryKey(id);
+        if (user == null) {
+            log.warn(ResultCode.ERROR_IS_NULL.toString());
+            throw new ApplicationException(AppResult.fail((ResultCode.ERROR_IS_NULL)));
+        }
+
+        User updateUser = new User();
+        updateUser.setId(user.getId());
+        updateUser.setArticleCount(user.getArticleCount()+1);
+
+        // 更新数据库
+        int row = userMapper.updateByPrimaryKeySelective(updateUser);
+        if (row != 1) {
+            log.warn(ResultCode.FAILED.toString() + ", will affect more than 1 row");
+            throw new ApplicationException(AppResult.fail(ResultCode.FAILED));
+        }
     }
 }

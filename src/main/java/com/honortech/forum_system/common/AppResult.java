@@ -1,9 +1,14 @@
 package com.honortech.forum_system.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class AppResult<T> {
     // 状态码
+    @JsonInclude(JsonInclude.Include.ALWAYS) // 总是参加 json 的序列化
     private long code;
+    @JsonInclude(JsonInclude.Include.ALWAYS)
     private String message;
+    @JsonInclude(JsonInclude.Include.ALWAYS)
     private T data;
 
     public AppResult() {}

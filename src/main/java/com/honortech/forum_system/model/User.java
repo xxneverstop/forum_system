@@ -1,5 +1,6 @@
 package com.honortech.forum_system.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.util.Date;
@@ -10,6 +11,8 @@ public class User {
 
     private String username;
 
+    // 该属性不参加 json 序列化
+    @JsonIgnore
     private String password;
 
     private String nickname;
@@ -20,6 +23,7 @@ public class User {
 
     private Byte gender;
 
+    @JsonIgnore
     private String salt;
 
     private String avatarUrl;
@@ -32,6 +36,7 @@ public class User {
 
     private Byte state;
 
+    @JsonIgnore
     private Byte deleteState;
 
     private Date createTime;
